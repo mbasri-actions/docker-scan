@@ -5,7 +5,6 @@ inputs:
     description: 'The reference to the Docker image'
     required: true
     default: null
-    type: string
 
 runs:
   using: 'composite'
