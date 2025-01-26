@@ -4,23 +4,33 @@ This GitHub Action scans a Docker image for vulnerabilities using Trivy and uplo
 
 ## Features
 
-- Scans Docker images for vulnerabilities using Trivy
+- Scans Docker images for vulnerabilities using `Trivy`
 - Uploads the scan results as an artifact
 - Supports JSON output format
 
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_aquasecurity_trivy_action"></a> [aquasecurity/trivy-action](https://github.com/aquasecurity/trivy-action) | 0.29.0 |
+| <a name="requirement_actions_upload_artifact"></a> [actions/upload-artifact](https://github.com/actions/upload-artifact) | 4.6.0 |
 
 ## Inputs
 
-| Name        | Description                          | Default |
-|-------------|--------------------------------------|---------|
-| `image-ref` | The reference to the Docker image    | `null`  |
+| Name | Description | Required | Default |
+| --- | --- | --- | --- |
+| <a name="input_image_ref"></a> [image-ref](#input_image_ref) | The reference to the Docker image  | true | `null` |
+
+## Outputs
+
+`No Outputs`
 
 ## Usage
 
 Here's an example of how to use this action in a GitHub Actions workflow:
 
 ```yaml
-name: Build, Push and Sign Docker Image
+name: Scan Docker Image
 
 on:
   push:
@@ -34,12 +44,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@main
-      - name: Scan Docker image for vulnerabilities
-        uses: mbasri-actions/docker-scan@main
-        with:
-          image-ref: 'ghcr.io/your-username/your-image:latest'
+    - uses: mbasri-actions/docker-scan@v1.0.0
+      with:
+        image-ref: ghcr.io/my-image:dev
 ```
 
 ## Author
