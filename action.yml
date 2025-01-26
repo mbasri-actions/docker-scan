@@ -1,18 +1,18 @@
 name: 'Socker Scan'
 description: 'Scan a Docker image for vulnerabilities'
+
 inputs:
   image-ref:
     description: 'The reference to the Docker image'
     required: true
     default: null
-    type: string
 
 runs:
   using: 'composite'
   steps:
-
+    # Step to run Trivy vulnerability scanner on the specified Docker image
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@v0.29.0
+      uses: aquasecurity/trivy-action@0.29.0
       with:
         scan-type: image
         image-ref: ${{ inputs.image-ref }}
@@ -21,6 +21,7 @@ runs:
         exit-code: 0
         ignore-unfixed: true
 
+    # Step to upload the vulnerability scan results as an artifact
     - name: Upload Vulnerability Scan Results
       uses: actions/upload-artifact@v4.6.0
       with:
